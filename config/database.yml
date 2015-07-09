@@ -1,0 +1,13 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password:
+
+development:
+  <<: *default
+  database: logistics_system_development
+
+test:
+  <<: *default
+  database: logistics_system_test
