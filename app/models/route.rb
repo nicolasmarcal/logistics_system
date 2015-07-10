@@ -10,17 +10,18 @@ class Route < ActiveRecord::Base
     arr << self
 
     if destination_locality_id == destination.id || origin_locality_id == destination.id
-      return journeys << arr
+      journeys << arr
     end
 
     destination_locality.destiny_routes.each do |route|
       if route.destination_locality_id == destination.id || route.origin_locality_id == destination.id
         arr << route
-        return journeys << arr
+        journeys << arr
       else
-        return route.route_journeys(destination, journeys, arr)
+        route.route_journeys(destination, journeys, arr)
       end
     end
+    return journeys
   end
 
   def journeys
