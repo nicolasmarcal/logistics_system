@@ -25,11 +25,11 @@ class JourneyMaker
   private
 
   def cheap_route
-    @cheap_route ||= origin.journeys_to(destiny).sort_by{ |journeys| journey_cost(journeys.map(&:distance).sum) }.first
+    @cheap_route ||= origin.journeys_to(destiny).sort_by{ |journeys| journey_cost(journeys.flatten.map(&:distance).sum) }.first
   end
 
   def journey_cost(distance)
-    (distance / @truck_autonomy) * liter_price.to_f
+    (distance / @truck_autonomy.to_f) * liter_price.to_f
   end
 
   def direct_route

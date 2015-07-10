@@ -11,7 +11,7 @@ class Locality < ActiveRecord::Base
     destiny_routes.map{ |route| route.route_journeys(destination) }.each do |routes|
       uniq_routes = routes.uniq.flatten
       arr = []
-  
+    
       journeys << [uniq_routes] if uniq_routes.one? && uniq_routes.first.origin_locality == self && uniq_routes.first.destination_locality == destination
       while uniq_routes.select{ |r| r.origin_locality != self }.any?{ |r| !r.visited } do
         uniq_routes.select{|r| !r.visited}.each do |route|
