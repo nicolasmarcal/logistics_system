@@ -4,7 +4,8 @@ class JourneyMaker
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  attr_accessor :origin_name, :destiny_name, :truck_autonomy, :liter_price, :origin, :destiny
+  attr_accessor :origin_name, :destiny_name, :truck_autonomy, :liter_price, :origin, :destiny,
+                :direct_route, :journeys
 
   validates_presence_of :origin, :destiny, :truck_autonomy, :liter_price
 
@@ -14,17 +15,25 @@ class JourneyMaker
     end
   end
 
-  def route
-    
+  def cheap_route
+    find_route
   end
 
   private
 
+  def find_route
+    origin.journeys_to(destiny)
+  end
+
+  def direct_route
+    @direct_route ||= Route.by_origin_and_destination(origin, destiny).first
+  end
+
   def origin
-    @origin ||= Locality.by_name(@origin_name).first
+    @origin ||= Locality.find_by(name: @origin_name)
   end
 
   def destiny
-    @destiny ||= Locality.by_name(@destiny_name).first
+    @destiny ||= Locality.find_by(name: @destiny_name)
   end
 end
