@@ -1,28 +1,31 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+Logistics System
 
 * Ruby version
+Ruby 2.1.6
 
 * System dependencies
+- gem 'rails', '4.2.1'
+- gem 'sass-rails', '~> 5.0'
+- gem 'uglifier', '>= 1.3.0'
+- gem 'coffee-rails', '~> 4.1.0'
+- gem 'mysql2'
+- gem 'jquery-rails'
+- gem 'turbolinks'
+- gem 'jbuilder', '~> 2.0'
+- gem 'sdoc', '~> 0.4.0', group: :doc
 
 * Configuration
+- run `bundle install`
 
 * Database creation
-
-* Database initialization
+- run `rake db:setup`
 
 * How to run the test suite
+- run `rake`
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Problem resolution
+- A documentação da API se encontra em doc/journeys_api.
+- Para desenvolvimento da solução, procurei compreender a teoria dos Grafos.
+- Busquei implementar um algoritmo que mapeie todos os caminhos possíveis de um ponto A para B, e a partir do caminhos traçados, calcular os valores e escolher o de menor valor.

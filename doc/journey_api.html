@@ -1,0 +1,142 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css">
+  <style>
+      body {
+        margin: 0;
+      }
+
+      .markdown-body {
+        min-width: 200px;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 30px;
+      }
+
+      footer {
+        margin: 20px 0 20px 0;
+        text-align: center;
+        font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        word-wrap: break-word;
+      }
+
+      table, tr, td, th, tbody, thead, tfoot {
+        page-break-inside: avoid !important;
+      }
+
+      @media screen {
+        body {
+          background-color: rgb(225, 231, 234);
+        }
+
+        .markdown-body {
+          background-color: rgb(255, 255, 255);
+          border: 1px solid black;
+          margin: 20px auto;
+          -webkit-box-shadow: 7px 7px 0px 0px rgba(50, 50, 50, 0.75);
+          -moz-box-shadow:    7px 7px 0px 0px rgba(50, 50, 50, 0.75);
+          box-shadow:         7px 7px 0px 0px rgba(50, 50, 50, 0.75);
+        }
+      }
+
+      @media print {
+        footer {
+          display: none;
+        }
+      }
+  </style>
+</head>
+<body>
+  <header>
+
+  </header>
+
+  <article class="markdown-body">
+    <h1 id="logistics-system-api-de-rota-mais-barata">Logistics System - API de rota mais barata</h1>
+
+<h2 id="buscar-rota-mais-barata">Buscar rota mais barata</h2>
+
+<p>Tenta encontrar a tota mais barata. Há campos a serem enviados. Caso estejam corretos e o sistema encontre os pontos A e B, retorna a rota. Caso contrário, retorna erros.</p>
+
+<p>A requisição deve ser feita em <code class="prettyprint">&lt;url&gt;/api/v1/journeys</code></p>
+
+<pre><code class="prettyprint">{
+  journeys: {
+    origin_name: &quot;A&quot;,
+    destiny_name: &quot;B&quot;,
+    truck_autonomy: 10.0,
+    liter_price: 2.5
+  } 
+}
+
+</code></pre>
+
+<h3 id="requisição">Requisição</h3>
+
+<pre><code class="prettyprint lang-http">POST &lt;url&gt;/api/v1/journeys
+</code></pre>
+
+<h3 id="parâmetros">Parâmetros</h3>
+
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">origin_name</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Nome do ponto de origem</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destiny_name</code></td>
+<td><code class="prettyprint">string</code></td>
+<td>Nome do ponto de destino</td>
+</tr>
+<tr>
+<td><code class="prettyprint">truck_autonomy</code></td>
+<td><code class="prettyprint">decimal</code></td>
+<td>Autonomia do caminhão</td>
+</tr>
+<tr>
+<td><code class="prettyprint">liter_price</code></td>
+<td><code class="prettyprint">decimal</code></td>
+<td>Valor do litro do combustível</td>
+</tr>
+</tbody></table>
+
+<h3 id="resposta">Resposta</h3>
+
+<table><thead>
+<tr>
+<th>Header Status</th>
+<th>JSON</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">200 OK</code></td>
+<td><code class="prettyprint">&quot;journey&quot; =&gt; {&quot;journey&quot; :[[&quot;A&quot;,&quot;C&quot;],[&quot;C&quot;,&quot;B&quot;]],&quot;cost&quot;:7.5}</code></td>
+<td>Rota mais barata encontrada com sucesso.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">422 Unprocessable Entity</code></td>
+<td><code class="prettyprint">&quot;errors&quot; =&gt; {&quot;origin&quot;=&gt;[&quot;can&#39;t be blank&quot;]}</code></td>
+<td>Rota não encontrada, devido aos erros descritos.</td>
+</tr>
+</tbody></table>
+
+  </article>
+
+  <footer>
+    © 2014 @americodls
+  </footer>
+</body>
+</html>
